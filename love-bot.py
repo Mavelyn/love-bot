@@ -1,43 +1,54 @@
-import os
 import discord
 import redis
-from dotenv import load_dotenv
 from discord.ext import commands
 
-# load_dotenv()
-# TOKEN = os.getenv('DISCORD_TOKEN')
-
-redis_server = redis.Redis()
-TOKEN = str(redis_server.get('DISCORD_TOKEN').decode('utf-8'))
+r = redis.Redis()
+TOKEN = str(r.get("DISCORD_TOKEN").decode("utf-8"))
 
 client = discord.Client()
 
 bot = commands.Bot(command_prefix='!')
 
-movies = []
-date_ideas = []
-restaurants = []
-
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user.name} has connected to Discord!')
+    print(f"{bot.user.name} has connected to Discord!")
+
+
+@bot.command(name="addmovie")
+async def add_movie(ctx, *, movie):
+    if r.exists("Movies"):
+        r.rpush("Movies", movie)
+    else:
+        r.set("Movies", [movie])
+    await ctx.send("New movie added.")
 
 
 @bot.command(name="movies")
 async def movie_list(ctx, movie):
-    movies.append(movie)
-    await ctx.send(movies)
+    if r.exists("Movies"):
+        movies = r.get("Movies")
+        await ctx.send(movies)
+    else:
+        await ctx.send("No movies found.")
+
+
+@bot.command(name="adddateidea")
+async def add_date_idea(ctx, *, date_idea):
+    if r.exists("Date Ideas"):
+        r.rpush("Date Ideas", date_idea)
+        await ctx.send("New date idea added.")
+    else:
+        await ctx.send("No date ideas found.")
 
 
 @bot.command(name="dateideas")
 async def date_ideas(ctx):
-    await ctx.send(date_ideas)
-
-
-@bot.command(name="restaurants")
-async def restaurant_list(ctx):
-    await ctx.send(restaurants)
+    if r.exists("Date Ideas"):
+        date_ideas = r.get("Date_Ideas")
+        await ctx.send(date_ideas)
+    else:
+        await ctx.send("No date ideas found.")
 
 
 @bot.command(name="cutestboi")

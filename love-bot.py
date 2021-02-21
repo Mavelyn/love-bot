@@ -24,7 +24,7 @@ async def add_movie(ctx, *, movie):
 @bot.command(name="movies")
 async def movie_list(ctx):
     if r.exists("Movies"):
-        movies = r.get("Movies")
+        movies = r.lrange("Movies", 0, -1)
         await ctx.send(movies)
     else:
         await ctx.send("No movies found.")
@@ -39,7 +39,7 @@ async def add_date_idea(ctx, *, date_idea):
 @bot.command(name="dateideas")
 async def date_ideas(ctx):
     if r.exists("Date Ideas"):
-        date_ideas = r.get("Date_Ideas")
+        date_ideas = r.lrange("Date Ideas", 0, -1)
         await ctx.send(date_ideas)
     else:
         await ctx.send("No date ideas found.")

@@ -2,8 +2,8 @@ import discord
 import redis
 from discord.ext import commands
 
-r = redis.Redis()
-TOKEN = str(r.get("DISCORD_TOKEN").decode("utf-8"))
+r = redis.Redis(charset="utf-8", decode_responses=True)
+TOKEN = str(r.get("DISCORD_TOKEN"))
 
 client = discord.Client()
 

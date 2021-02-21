@@ -1,5 +1,6 @@
 import discord
 import redis
+import random
 from discord.ext import commands
 
 r = redis.Redis(charset="utf-8", decode_responses=True)
@@ -26,6 +27,14 @@ async def remove_movie(ctx, *, movie):
     r.lrem("Movies", 0, movie)
     await ctx.send("Movie has been deleted.")
 
+
+@bot.command(name="choose_movie")
+async def choose_movie(ctx):
+    movies = r.lrange("Movies", 0, -1)
+    random_movie = random.choice(movies)
+    await ctx.send(f'{random_movie} has been randomly selected. Enjoy your movie!')
+
+
 @bot.command(name="movies")
 async def list_movies(ctx):
     if r.exists("Movies"):
@@ -51,7 +60,15 @@ async def add_date_idea(ctx, *, date_idea):
 async def remove_date_idea(ctx, *, date_idea):
     r.lrem("Date Ideas", 0, date_idea)
     await ctx.send("Date idea removed.")
-    
+
+
+@bot.command(name="choose_date")
+async def choose_date(ctx):
+    date_ideas = r.lrange("Date Ideas", 0, -1)
+    random_date_idea = random.choice(date_ideas)
+    await ctx.send(f'{random_date_idea} has been selected. Enjoy your date!')
+
+
 @bot.command(name="date_ideas")
 async def list_date_ideas(ctx):
     if r.exists("Date Ideas"):

@@ -17,15 +17,12 @@ async def on_ready():
 
 @bot.command(name="addmovie")
 async def add_movie(ctx, *, movie):
-    if r.exists("Movies"):
-        r.rpush("Movies", movie)
-    else:
-        r.set("Movies", [movie])
+    r.rpush("Movies", movie)
     await ctx.send("New movie added.")
 
 
 @bot.command(name="movies")
-async def movie_list(ctx, movie):
+async def movie_list(ctx):
     if r.exists("Movies"):
         movies = r.get("Movies")
         await ctx.send(movies)
@@ -35,11 +32,8 @@ async def movie_list(ctx, movie):
 
 @bot.command(name="adddateidea")
 async def add_date_idea(ctx, *, date_idea):
-    if r.exists("Date Ideas"):
-        r.rpush("Date Ideas", date_idea)
-        await ctx.send("New date idea added.")
-    else:
-        await ctx.send("No date ideas found.")
+    r.rpush("Date Ideas", date_idea)
+    await ctx.send("New date idea added.")
 
 
 @bot.command(name="dateideas")

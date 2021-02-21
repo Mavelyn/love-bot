@@ -30,7 +30,7 @@ async def list_movies(ctx):
             color=discord.Color.blue()
         )
         for movie in movies:
-            embed.add_field(name=movie, inline=False)
+            embed.add_field(name='\u200b', value=movie, inline=False)
         await ctx.send(embed=embed)
     else:
         await ctx.send("No movies found.")
@@ -54,7 +54,7 @@ async def list_date_ideas(ctx):
             color=discord.Color.blue()
         )
         for idea in date_ideas:
-            embed.add_field(name=idea, inline=False)
+            embed.add_field(name='\u200b', value=idea, inline=False)
         await ctx.send(embed=embed)
     else:
         await ctx.send("No date ideas found.")

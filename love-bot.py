@@ -15,11 +15,16 @@ async def on_ready():
     print(f"{bot.user.name} has connected to Discord!")
 
 
-@bot.command(name="addmovie")
+@bot.command(name="add_movie")
 async def add_movie(ctx, *, movie):
     r.rpush("Movies", movie)
     await ctx.send("New movie added.")
 
+
+@bot.command(name="remove_movie")
+async def remove_movie(ctx, *, movie):
+    r.lrem("Movies", 0, movie)
+    await ctx.send("Movie has been deleted.")
 
 @bot.command(name="movies")
 async def list_movies(ctx):
@@ -36,16 +41,18 @@ async def list_movies(ctx):
         await ctx.send("No movies found.")
 
 
-
-
-
-@bot.command(name="adddateidea")
+@bot.command(name="add_date_idea")
 async def add_date_idea(ctx, *, date_idea):
     r.rpush("Date Ideas", date_idea)
     await ctx.send("New date idea added.")
 
 
-@bot.command(name="dateideas")
+@bot.command(name="remove_date_idea")
+async def remove_date_idea(ctx, *, date_idea):
+    r.lrem("Date Ideas", 0, date_idea)
+    await ctx.send("Date idea removed.")
+    
+@bot.command(name="date_ideas")
 async def list_date_ideas(ctx):
     if r.exists("Date Ideas"):
         date_ideas = r.lrange("Date Ideas", 0, -1)

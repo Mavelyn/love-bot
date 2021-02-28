@@ -8,12 +8,31 @@ TOKEN = str(r.get("DISCORD_TOKEN"))
 
 client = discord.Client()
 
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='!', help_command=None)
 
 
 @bot.event
 async def on_ready():
     print(f"{bot.user.name} has connected to Discord!")
+
+
+@bot.command(name="help")
+async def help_command(ctx):
+    embed = discord.Embed(
+        title="Love-Bot Commands",
+        color=discord.Color.orange()
+    )
+
+    embed.add_field(name="!movies", value="Shows movie list.", inline=True)
+    embed.add_field(name="!add_movie", value="Adds movie to movie list.", inline=True)
+    embed.add_field(name="!remove_movie", value="Removes movie from movie list.", inline=True)
+    embed.add_field(name="!choose_movie", value="Randomly chooses movie from movie list.", inline=True)
+    embed.add_field(name="!date_ideas", value="Shows list of date ideas.", inline=True)
+    embed.add_field(name="!add_date_idea", value="Adds a date idea to date idea list.", inline=True)
+    embed.add_field(name="!remove_date_idea", value="Adds a date idea to date idea list.", inline=True)
+    embed.add_field(name="!choose_date_idea", value="Adds a date idea to date idea list.", inline=True)
+
+    await ctx.send(embed=embed)
 
 
 @bot.command(name="add_movie")

@@ -20,17 +20,17 @@ async def on_ready():
 async def help_command(ctx):
     embed = discord.Embed(
         title="Love-Bot Commands",
-        color=discord.Color.orange()
+        color=discord.Color.green()
     )
 
-    embed.add_field(name="!movies", value="Shows movie list.", inline=True)
-    embed.add_field(name="!add_movie", value="Adds movie to movie list.", inline=True)
-    embed.add_field(name="!remove_movie", value="Removes movie from movie list.", inline=True)
-    embed.add_field(name="!choose_movie", value="Randomly chooses movie from movie list.", inline=True)
-    embed.add_field(name="!date_ideas", value="Shows list of date ideas.", inline=True)
-    embed.add_field(name="!add_date_idea", value="Adds a date idea to date idea list.", inline=True)
-    embed.add_field(name="!remove_date_idea", value="Adds a date idea to date idea list.", inline=True)
-    embed.add_field(name="!choose_date_idea", value="Adds a date idea to date idea list.", inline=True)
+    embed.add_field(name="!movies", value="Shows movie list.", inline=False)
+    embed.add_field(name="!add_movie", value="Adds movie to movie list.", inline=False)
+    embed.add_field(name="!remove_movie", value="Removes movie from movie list.", inline=False)
+    embed.add_field(name="!choose_movie", value="Randomly chooses movie from movie list.", inline=False)
+    embed.add_field(name="!date_ideas", value="Shows list of date ideas.", inline=False)
+    embed.add_field(name="!add_date_idea", value="Adds a date idea to date idea list.", inline=False)
+    embed.add_field(name="!remove_date_idea", value="Adds a date idea to date idea list.", inline=False)
+    embed.add_field(name="!choose_date_idea", value="Adds a date idea to date idea list.", inline=False)
 
     await ctx.send(embed=embed)
 

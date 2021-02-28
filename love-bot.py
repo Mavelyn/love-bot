@@ -47,8 +47,8 @@ async def list_movies(ctx):
             title="Our Movie List",
             color=discord.Color.blue()
         )
-        for movie in movies:
-            embed.add_field(name='\u200b', value=movie, inline=False)
+        movie_string = "\n".join(movies)
+        embed.add_field(name='\u200b', value=movie_string, inline=False)
         await ctx.send(embed=embed)
     else:
         await ctx.send("No movies found. Use !add_movie to start adding.")
@@ -81,8 +81,8 @@ async def list_date_ideas(ctx):
             title="Date Ideas",
             color=discord.Color.blue()
         )
-        for idea in date_ideas:
-            embed.add_field(name='\u200b', value=idea, inline=False)
+        date_idea_string = "\n".join(date_ideas)
+        embed.add_field(name='\u200b', value=date_idea_string, inline=False)
         await ctx.send(embed=embed)
     else:
         await ctx.send("No date ideas found. Use !add_date_idea to start adding.")
@@ -115,8 +115,8 @@ async def list_restaurants(ctx):
             title="Restaurants",
             color=discord.Color.teal()
         )
-        for restaurant in restaurants:
-            embed.add_field(name=restaurant, inline=False)
+        restaurant_string = "\n".join(restaurants)
+        embed.add_field(name='\u200b', value=restaurant_string, inline=False)
         await ctx.send(embed=embed)
     else:
         await ctx.send("No restaurants found. Use !add_restaurant to start adding.")

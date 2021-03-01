@@ -2,4 +2,4 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /love-bot-deploy
+    destination: /love-bot-deploy/love-bot
